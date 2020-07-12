@@ -1,0 +1,174 @@
+<{* $Id: happy_search_index.html,v 1.6 2008/07/09 07:51:54 ohwada Exp $ *}>
+
+<{if $show_module_header }>
+  <link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/modules/<{$dirname}>/include/happy_search.css" />
+  <script src="<{$xoops_url}>/modules/<{$dirname}>/include/happy_search.js" type="text/javascript" ></script>
+<{/if}>
+
+<h3 class="head"><{$module_name}></h3>
+<p><{$lang_desc}></p>
+
+<form name="happy_search" action="<{$xoops_url}>/modules/<{$dirname}>/index.php" method="get">
+<input type="hidden" name="action" value="init" />
+<input type="hidden" name="andor"  value="AND" />
+<input type="text"   name="query" size="40" value="<{$query}>" /> 
+<input type="submit" name="submit" value="<{$lang_search}>" /> <br />
+</form>
+
+<h3><{$lang_search_results}></h3>
+<{$lang_keyword}>:
+<{foreach item=keyword from=$keywords}>
+  <strong><{$keyword}></strong> 
+<{/foreach}>
+
+<{if $show_candidate }>
+  <br />
+  <{$lang_candidate}>:<br />
+  <{foreach item=candidate from=$candidates}>
+    <strong><{$candidate.keyword}></strong>(<{$candidate.lang}>) 
+  <{/foreach}>
+  <br />
+<{/if}>
+
+<{if $show_ignore }>
+  <br />
+  <{$lang_ignore}><br />
+  <{foreach item=ignore from=$ignores}>
+    <strong><{$ignore}></strong> 
+  <{/foreach}>
+  <br />
+<{/if}>
+
+<{if $show_first}>
+  <h4 class="head"><{$lang_label_first}></h4>
+
+<{* === first modules === *}>
+  <{foreach item=module from=$first_modules}>
+    <{if $module.no_match==""}>
+      <h4><{$module.name}></h4>
+
+<{* --- first results --- *}>
+      <{foreach item=result from=$module.results}>
+        <img src="<{$xoops_url}><{$result.image}>" alt="<{$module.name}>" /> 
+        <a href="<{$xoops_url}><{$result.link}>">
+        <span class="happy_search_title"><{$result.title}></span></a> 
+        <span class="happy_search_time">
+        <{if $result.uid!=0}>
+          <a href="<{$xoops_url}>/userinfo.php?uid=<{$result.uid}>"><{$result.uname}></a> 
+        <{/if}>
+        <{if $result.time_l!=""}>
+          (<{$result.time_l}>)
+        <{/if}>
+        </span><br />
+        <{if $show_img && $result.img_url }>
+          <div class="happy_search_image">
+          <a href="<{$xoops_url}><{$result.link}>">
+          <{if $result.img_width && $result.img_height }>
+            <img src="<{$result.img_url}>" width="<{$result.img_width}>" height="<{$result.img_height}>" alt="<{$result.title}>" title="<{$result.title}>" border="0" />
+          <{else}>
+            <img src="<{$result.img_url}>" alt="<{$result.title}>" title="<{$result.title}>" border="0" />
+          <{/if}>
+          </a>
+          </div>
+        <{/if}>
+        <{if $show_context && $result.context }>
+          <div class="happy_search_context"><{$result.context}></div>
+        <{/if}>
+      <{/foreach}>
+<{* --- first results end --- *}>
+
+      <{if $module.showall_link!=""}>
+        <br /><{$module.showall_link}>
+      <{/if}>
+    <{/if}>
+  <{/foreach}>
+<{* === first moduels end === *}>
+
+<{/if}>
+
+<{if $show_second}>
+  <h4 class="head"><{$lang_label_second}></h4>
+
+<{* === second modules === *}> 
+  <{foreach item=module from=$second_modules}>
+    <{if $module.no_match==""}>
+      <h4><{$module.name}></h4>
+
+<{* --- second results --- *}>
+      <{foreach item=result from=$module.results}>
+        <img src="<{$xoops_url}><{$result.image}>" alt="<{$module.name}>" /> 
+        <a href="<{$result.full_link}>" target="_blank">
+        <span class="happy_search_title"><{$result.title}></span></a> 
+        <span class="happy_search_time">
+        <{if $result.time_l!=""}>
+          (<{$result.time_l}>)
+        <{/if}>
+        </span><br />
+        <{if $show_img && $result.img_url }>
+          <div class="happy_search_image">
+          <{if $result.img_width && $result.img_height }>
+            <img src="<{$result.img_url}>" width="<{$result.img_width}>" height="<{$result.img_height}>" alt="<{$result.title}>" title="<{$result.title}>" border="0" />
+          <{else}>
+            <img src="<{$result.img_url}>" alt="<{$result.title}>" title="<{$result.title}>" border="0" />
+          <{/if}>
+          </div>
+        <{/if}>
+        <{if $show_context && $result.context }>
+          <div class="happy_search_context">
+          <{$result.context}><br />
+          <span class="happy_search_link"><{$result.full_link}></span>
+          </div>
+        <{/if}>
+      <{/foreach}>
+<{* --- second results --- *}>
+
+      <{if $module.showall_link!=""}>
+        <br /><{$module.showall_link}>
+      <{/if}>
+    <{/if}>
+  <{/foreach}>
+<{* === second modules end === *}>
+
+<{/if}>
+
+<{if $show_google_ajax}>
+  <h4 class="head"><{$lang_label_google_ajax}></h4>
+  <{$google_ajax}>
+<{/if}>
+
+<{if $show_google_soap}>
+  <h4 class="head"><{$lang_label_google_soap}></h4>
+  <{$google_soap}>
+<{/if}>
+
+<br /><br />
+<{$search_form}>
+
+<hr />
+<div style="font-size: 80%; ">
+  execution time : <{$execution_time}> sec 
+</div>
+<{if $is_module_admin }>
+  <{if $memory_usage > 0}>
+    <div style="font-size: 80%;">
+      memory usage : <{$memory_usage}> MB <br />
+    </div>
+  <{/if}>
+  <input type="button" value="detail" onClick="happy_search_on_off('happy_search_measure_detail')">
+  <div id="happy_search_measure_detail" style="display:none;">
+    <{$measure_detail}>
+  </div>
+<{/if}>
+
+<{* this is NOT copyright. you can remove this *}>
+<div style="text-align: right; font-size: 80%; ">
+  <a href="<{$happy_linux_url}>" target="_blank">happy search</a> | 
+  <a href="http://kjw0815.codns.com/wanisys/japanese/xoops/html/" target="_blank">xoogle euc-kr</a> | 
+  <a href="http://www.suin.jp" target="_blank">search</a> | 
+  <a href="http://xoopscube.jp/" target="_blank">xoops(original)</a>
+</div>
+
+<{if $is_module_admin }>
+	<a href="<{$xoops_url}>/modules/<{$dirname}>/admin/index.php">
+	<{$lang_goto_admin}></a>
+<{/if}>

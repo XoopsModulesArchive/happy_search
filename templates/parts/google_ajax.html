@@ -1,0 +1,57 @@
+<{* $Id: google_ajax.html,v 1.1 2007/07/04 11:07:49 ohwada Exp $ *}>
+<{* http://code.google.com/apis/ajaxsearch/ *}>
+
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/modules/<{$dirname}>/include/happy_search_google_ajax.css" />
+<script src="http://www.google.com/uds/api?file=uds.js&amp;v=1.0&amp;key=<{$ga_api_key}>" type="text/javascript"></script>
+<script language="Javascript" type="text/javascript">
+//<![CDATA[
+
+function happy_search_load() 
+{
+	var happy_search_control = new GSearchControl();
+
+<{if $ga_use_site_search }>
+	var happy_search_site_search = new GwebSearch();
+	happy_search_site_search.setUserDefinedLabel( "<{$ga_site_label}>" );
+	happy_search_site_search.setUserDefinedClassSuffix( "<{$ga_site_suffix}>" );
+	happy_search_site_search.setSiteRestriction( "<{$ga_site_restriction}>" );
+	happy_search_control.addSearcher( happy_search_site_search );
+<{/if}>
+<{if $ga_use_web_search }>
+	happy_search_control.addSearcher(new GwebSearch());
+<{/if}>
+<{if $ga_use_blog_search }>
+	happy_search_control.addSearcher(new GblogSearch());
+<{/if}>
+<{if $ga_use_news_search }>
+	happy_search_control.addSearcher(new GnewsSearch());
+<{/if}>
+<{if $ga_use_book_search }>
+	happy_search_control.addSearcher(new GbookSearch());
+<{/if}>
+<{if $ga_use_video_search }>
+	happy_search_control.addSearcher(new GvideoSearch());
+<{/if}>
+<{if $ga_use_local_search }>
+	var happy_search_local_search = new GlocalSearch();
+	happy_search_control.addSearcher(happy_search_local_search);
+	happy_search_local_search.setCenterPoint("<{$ga_local_center_point}>");
+<{/if}>
+<{if $ga_draw_mode == "tabbed" }>
+	var happy_search_draw_options = new GdrawOptions();
+	happy_search_draw_options.setDrawMode(GSearchControl.DRAW_MODE_TABBED);
+	happy_search_control.draw(document.getElementById("happy_search_result"), happy_search_draw_options);
+<{else}>
+	happy_search_control.draw(document.getElementById("happy_search_result"));
+<{/if}>
+
+	happy_search_control.execute("<{$ga_keyword}>");
+}
+
+window.onload = happy_search_load;
+
+//]]>
+</script>
+
+<div id="happy_search_result">Loading ...</div>
+

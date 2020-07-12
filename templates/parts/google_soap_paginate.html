@@ -1,0 +1,51 @@
+<{* $Id: google_soap_paginate.html,v 1.1 2007/07/04 11:07:49 ohwada Exp $ *}>
+
+<table class="outer" width='100%' cellspacing="1">
+<tr><td class="even">
+<{if $google_paginate.page > 1 }>
+  <a href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=<{$google_post.query_urlencode}>&amp;search=<{$google_post.search}><{if $google_post.lr}>&amp;lr=<{$google_post.lr}><{/if}>&amp;page=1" title="view the first page">
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_first.gif"></a>
+<{else}>
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_first_off.gif">
+<{/if}>
+ page 
+<{$google_paginate.page}> of 
+<a class="info" href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=<{$google_post.query_urlencode}>&amp;search=<{$google_post.search}><{if $google_post.lr}>&amp;lr=<{$google_post.lr}><{/if}>&amp;page=<{$google_paginate.count}>" title="view the last page">
+<{$google_paginate.count}></a> | 
+<{if $google_paginate.filter_on}>
+  found <{$total_matched}>/<{$total_items}> | 
+<{/if}>
+ showing 
+<{$google_paginate.first_rec}>-<{$google_paginate.last_rec}> of 
+<{$google_paginate.total_matched}>
+</td>
+<td align="right" class="even">
+<{if $google_paginate.page > 1 }>
+  <a class="info" href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=<{$google_post.query_urlencode}>&amp;search=<{$google_post.search}><{if $google_post.lr}>&amp;lr=<{$google_post.lr}><{/if}>&amp;page=1" title="view the first page">
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_first.gif"></a>
+<{else}>
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_first_off.gif">
+<{/if}>
+ &nbsp; 
+<{if $google_paginate.prev > 0}>
+  <a class="info" href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=<{$google_post.query_urlencode}>&amp;search=<{$google_post.search}><{if $google_post.lr}>&amp;lr=<{$google_post.lr}><{/if}>&amp;page=<{$google_paginate.prev}>" title="view previous page">
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_prev.gif"></a>
+<{else}>
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_prev_off.gif">
+<{/if}>
+ &nbsp; 
+<{if $google_paginate.next > 0}>
+  <a class="info" href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=<{$google_post.query_urlencode}>&amp;search=<{$google_post.search}><{if $google_post.lr}>&amp;lr=<{$google_post.lr}><{/if}>&amp;page=<{$google_paginate.next}>" title="view the next page">
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_next.gif"></a>
+<{else}>
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_next_off.gif">
+<{/if}>
+ &nbsp; 
+<{if $google_paginate.count > 1 and $google_paginate.count != $google_paginate.page}>
+  <a class="info" href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=<{$google_post.query_urlencode}>&amp;search=<{$google_post.search}><{if $google_post.lr}>&amp;lr=<{$google_post.lr}><{/if}>&amp;page=<{$google_paginate.count}>" title="view the last page">
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_last.gif"></a>
+<{else}>
+  <img src="<{$xoops_url}>/modules/happy_search/images/ks_ico_last_off.gif">
+<{/if}>
+</td></tr>
+</table>

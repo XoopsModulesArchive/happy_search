@@ -1,0 +1,12 @@
+<{* $Id: google_soap_form.html,v 1.1 2007/07/04 11:07:49 ohwada Exp $ *}>
+
+<form action="<{$xoops_url}>/modules/<{$dirname}>/index.php" method="get">
+<{$lang_search}> <input type="text" name="query" size="40" value="<{$google_query_s}>">
+<{if $google_sl_select }>
+  <{$google_sl_select}>
+<{/if}>
+<{if $google_lr_select }>
+  <{$google_lr_select}>
+<{/if}>
+<input type="submit" value="<{$lang_search}>">
+</form>

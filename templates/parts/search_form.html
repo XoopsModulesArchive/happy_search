@@ -1,0 +1,96 @@
+<{* $Id: search_form.html,v 1.1 2007/07/04 11:07:49 ohwada Exp $ *}>
+
+<{* google search *}>
+<script>
+<!--
+function happy_search_qs(el) 
+{
+  if (window.RegExp && window.encodeURIComponent) 
+  {
+    var ue=el.href;
+    var qe=encodeURIComponent(document.happy_search_gs.query.value);
+    if(ue.indexOf("q=")!=-1)
+    {
+      el.href=ue.replace(new RegExp("q=[^&$]*"),"q="+qe);
+    }
+    else
+    {
+      el.href=ue+"&q="+qe;
+    }
+  }
+  return 1;
+}
+// -->
+</script>
+
+<form name="happy_search_gs" id="happy_search_gs" action="index.php" method="get">
+<input type="hidden" name="action" id="action" value="results" />
+<table width="100%" class="outer" cellspacing="1">
+<tr>
+  <th colspan="2"><{$lang_search}></th>
+</tr>
+<tr valign="top" align="left">
+  <td class="head"><{$lang_keywords}></td>
+  <td class="even">
+    <input type="text" name="query" id="query" size="40" maxlength="255" value="<{$query_s}>" />
+  </td>
+</tr>
+<tr valign="top" align="left">
+  <td class="head"><{$lang_type}></td>
+  <td class="even">
+    <select  size="1" name="andor" id="andor">
+    <option value="AND" <{$selected_and}> ><{$lang_all}></option>
+    <option value="OR" <{$selected_or}> ><{$lang_any}></option>
+    <option value="exact" <{$selected_exact}> ><{$lang_exact}></option>
+    </select>
+  </td>
+</tr>
+<tr valign="top" align="left">
+  <td class="head"><{$lang_search_in}></td>
+  <td class="even"><{$search_modules}></td>
+</tr>
+<{if $search_google_ajax }>
+  <tr valign="top" align="left">
+    <td class="head"><{$lang_google_ajax}></td>
+    <td class="even"><{$search_google_ajax}></td>
+  </tr>
+<{/if}>
+<{if $search_google_soap }>
+  <tr valign="top" align="left">
+    <td class="head"><{$lang_google_soap}></td>
+    <td class="even"><{$search_google_soap}></td>
+  </tr>
+<{/if}>
+<tr valign="top" align="left">
+  <td class="head"><{$lang_show_context}></td>
+  <td class="even">
+    <input type="radio" name="showcontext" value="1" <{$checked_context_yes}> /> <{$lang_yes}>
+    <input type="radio" name="showcontext" value="0" <{$checked_context_no}> /> <{$lang_no}>
+  </td>
+</tr>
+<tr valign="top" align="left">
+  <td class="head"><{$lang_search_rule}></td>
+  <td class="even"><{$search_rule}></td>
+</tr>
+<tr valign="top" align="left">
+  <td class="head"></td>
+  <td class="even">
+    <input type="submit" name="submit" id="submit" value="<{$lang_search}>" />
+  </td>
+</tr>
+<tr valign="top" align="left">
+  <td class="head"></td>
+  <td class="even">
+  <input type="submit" name="xoops" value="<{$lang_xoops_name}>" /> 
+  <{if $lang_search_name }>
+    <input type="submit" name="suin" value="<{$lang_search_name}>" /> 
+  <{/if}>
+  <{if $lang_xoogle_name }>
+    <input type="submit" name="xoogle" value="<{$lang_xoogle_name}>" /> 
+  <{/if}>
+  <a id="happy_search_t1" href="http://www.google.com/search?hl=<{$xoops_langcode}>&amp;lr=lang_<{$xoops_langcode}>&amp;q=<{$query_utf8_urlencode}>" target="_blank" onClick="return happy_search_qs(this);">[<{$lang_google_name}>]</a>
+  </td>
+</tr>
+
+</table>
+</form>

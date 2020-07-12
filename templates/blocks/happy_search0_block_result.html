@@ -1,0 +1,78 @@
+<{* $Id: happy_search0_block_result.html,v 1.2 2007/11/26 03:42:06 ohwada Exp $ *}>
+
+<div align="center">
+<form action="<{$xoops_url}>/modules/happy_search/index.php" method="get">
+<input type="hidden" name="action" value="init" />
+<input type="hidden" name="andor"  value="AND" />
+<input type="text" name="query" size="20" value="<{$block.query}>" /> 
+<input type="submit" value="<{$block.lang_search}>" />
+</form>
+</div>
+
+<{if $block.show_first }>
+  <h4><{$block.lang_label_first}></h4>
+  <ul>
+  <{foreach item=result from=$block.first_results}>
+    <li>
+    <a href="<{$xoops_url}><{$result.link}>"><b><{$result.title}></b></a> 
+    in <a href="<{$xoops_url}>/modules/<{$result.mod_dirname}>/"><{$result.mod_name}></a> 
+    <small>
+    <{if $result.uid!=0}>
+      <a href="<{$xoops_url}>/userinfo.php?uid=<{$result.uid}>"><{$result.uname}></a> 
+    <{/if}>
+    <{if $result.time_s!=""}>
+      (<{$result.time_s}>)
+    <{/if}>
+    </small><br />
+    <{if  $block.show_context && $result.context }>
+      <{$result.context}> <br />
+    <{/if}>
+    <br />
+    </li>
+  <{/foreach}>
+  </ul>
+<{/if}>
+
+<{if $block.show_second }>
+  <h4><{$block.lang_label_second}></h4>
+  <ul>
+  <{foreach item=result from=$block.second_results}>
+    <li>
+    <a href="<{$result.full_link}>" target="_blank"><b><{$result.title}></b></a> 
+    <small>
+    <{if $result.time_s!=""}>
+      (<{$result.time_s}>)
+    <{/if}>
+    </small><br />
+    <{if $block.show_context && $result.context }>
+      <{$result.context}> <br />
+    <{/if}>
+    <br />
+    </li>
+  <{/foreach}>
+  </ul>
+<{/if}>
+
+<{if $block.show_google_soap }>
+  <h4><{$block.lang_label_google_soap}></h4>
+  <ul>
+  <{foreach item=result from=$block.google_soap_results}>
+    <li>
+      <a href="<{$result.url}>" target="_blank"><b><{$result.title}></b></a><br />
+      <{if $block.show_context && $result.snippet }>
+        <{$result.snippet}> <br />
+      <{/if}>
+    <br />
+    </li>
+  <{/foreach}>
+  </ul>
+<{/if}>
+
+<{if $block.show_google_ajax}>
+  <h4><{$block.lang_label_google_ajax}></h4>
+  <{$block.google_ajax}>
+<{/if}>
+
+<{if $block.is_admin && $block.nusoap_error}>
+  <h4 style="color: #ff0000; "><{$block.nusoap_error}></h4>
+<{/if}>

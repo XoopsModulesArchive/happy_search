@@ -1,0 +1,36 @@
+<{* $Id: google_soap.html,v 1.1 2007/07/04 11:07:49 ohwada Exp $ *}>
+
+<{if $google_soap_error != '' }>
+  <b><{$google_soap_error }></b><br />
+<{elseif $google_error != ''}>
+  <b><{$google_error}></b><br />
+<{elseif $google_results != ''}>
+  <{foreach item=result from=$google_results}>
+    <a href="<{$result.url}>" target="_blank">
+    <span class="happy_search_title"><{$result.title}></span></a><br />
+    <{if $show_context }>
+      <div class="happy_search_context">
+      <{$result.snippet}> <br />
+      <{if $result.summary}>
+        <span class="happy_search_google_subtitle">Summary : </span>
+        <{$result.summary}><br />
+      <{/if}>
+      <{if $result.viewable_name}>
+        <span class="happy_search_google_subtitle">Category : </span>
+        <a href="http://directory.google.com/<{$result.viewable_name}>/?il=1" target="_blank">
+        <{$result.viewable_name}></a><br />
+      <{/if}>
+      <span class="happy_search_google_cachedsize"><{$result.url}> - <{$result.cached_size}> - </span>
+      <a href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=link:<{$result.url}>">
+      Link pages</a>
+      <{if $result.related == "1"}>
+        - <a href="<{$xoops_url}>/modules/happy_search/index.php?action=google&amp;query=related:<{$result.url}>">
+        Similar pages</a>
+      <{/if}>
+      </div>
+    <{/if}>
+    <br />
+  <{/foreach}>
+  <{$google_soap_paginate}>
+  <br />
+<{/if}>

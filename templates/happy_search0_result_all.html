@@ -1,0 +1,47 @@
+<{* $Id: happy_search0_result_all.html,v 1.3 2008/02/16 16:29:21 ohwada Exp $ *}>
+
+<{if $show_module_header }>
+  <link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/modules/<{$dirname}>/include/happy_search.css" />
+<{/if}>
+
+<{if $show_result}>
+  <h3><{$lang_search_results}></h3>
+  <{$lang_keyword}>:
+  <{foreach item=keyword from=$keywords}>
+    <strong><{$keyword}></strong> 
+  <{/foreach}>
+  <{$showing}>
+  <h4><{$module_name}></h4>
+  <{foreach item=result from=$results}>
+    <img src="<{$xoops_url}><{$result.image}>" alt="<{$module_name}>" />
+    <a href="<{$xoops_url}><{$result.link}>">
+    <span class="happy_search_title"><{$result.title}></span></a>
+    <span class="happy_search_time">
+    <{if $result.uid!=0}>
+      <a href="<{$xoops_url}>/userinfo.php?uid=<{$result.uid}>"><{$result.uname}></a>
+    <{/if}>
+    <{if $result.time_l!=""}>
+      (<{$result.time_l}>)
+    <{/if}>
+    </span><br />
+    <{if $result.context!=""}>
+      <div class="happy_search_context"><{$result.context}></div>
+    <{/if}>
+  <{/foreach}>
+  <br />
+  <{$navi}>
+<{else}>
+  <b><{$lang_no_match}></b><br />
+<{/if}>
+
+<{$search_form}>
+
+<hr />
+<div style="text-align: left; font-size: 80%; ">
+  execution time : <{$execution_time}> sec 
+</div>
+<{if $is_module_admin && ($memory_usage > 0)}>
+	<div style="text-align: left; font-size: 80%; ">
+	  memory usage : <{$memory_usage}> MB 
+	</div>
+<{/if}>

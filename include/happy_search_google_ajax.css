@@ -1,0 +1,21 @@
+/* $Id: happy_search_google_ajax.css,v 1.1 2007/07/04 11:07:48 ohwada Exp $ */
+
+@import url(http://www.google.com/uds/css/gsearch.css);
+
+/* overrided orginal parameter */
+.gsc-control 
+{
+/*	width: 300px;	*/
+	width: 100%;
+}
+
+table.gsc-search-box 
+{
+	border-style : none;
+	border-width : 0px;
+	border-spacing : 0px 0px;
+/*	width : 100%;	*/
+	width : 300px;
+	margin-bottom : 2px;
+}
+
